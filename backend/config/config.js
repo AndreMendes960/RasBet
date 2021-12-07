@@ -4,7 +4,7 @@ if (!process.env.DB_HOST) {
 
 const fs = require('fs');
 
-let config = {
+let config = {  
   database: "RasBet",
   username: "postgres",
   password: "fenoninho123",

@@ -1,28 +1,26 @@
 import { useEffect, useState } from "react"
 import './App.css';
 import {fetchEvents} from './EventAPI'
-import TestPage from "./TestPage";
+import Events from "./Events";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 function App() {
-  const [resources, setResources] = useState([]);
-  const [isLoading, setLoading] = useState(true)
+return(
 
-useEffect(()=>
-{
-  fetchEvents().then(response => {
-    setResources(response)
-    setLoading(false);
-  });
-}, [])
+<BrowserRouter>
+      <Routes>
+        <Route path="/events" element={<Events />} />
+        {/* <Route path="users" element={<Users />}>
+          <Route path="/" element={<UsersIndex />} />
+          <Route path=":id" element={<UserProfile />} />
+          <Route path="me" element={<OwnUserProfile />} />
+        </Route> */}
+      </Routes>
+    </BrowserRouter>
 
-
-if (isLoading) {
-  return <div className="App">Loading...</div>;
+)
 }
 
 
-  return (
-   <TestPage items={resources}></TestPage>
-  );
-}
+
 
 export default App;
