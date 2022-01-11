@@ -8,4 +8,6 @@ var router = express.Router();
 /* GET home page. */
 
 router.get('/testing', EventController.testing); 
+router.post('/registar', EventController.registar); 
+router.post('/login', EventController.login); 
 module.exports = router;
