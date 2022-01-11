@@ -1,9 +1,9 @@
 import {useState } from "react"
 import {useRef} from 'react'
 import { sendLogin } from "../EventAPI";
+import PropTypes from 'prop-types';
 
-
-function Login() {
+function Login({setToken}) {
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
@@ -13,7 +13,7 @@ function Login() {
         const enteredEmail = emailInputRef.current.value
         const enteredPassword = passwordInputRef.current.value
 
-        sendLogin( enteredEmail, enteredPassword)
+        sendLogin( enteredEmail, enteredPassword).then(response => setToken(response.token))
 
         event.preventDefault()
     }
@@ -34,4 +34,9 @@ return (
     );
 }
   
+
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
+  };
+
 export default Login;

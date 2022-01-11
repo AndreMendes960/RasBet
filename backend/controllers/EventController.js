@@ -48,18 +48,18 @@ exports.registar = async function(req,res){
 
 exports.login = async function(req,res){
 
-  console.log(req.body.params)
   const user2 = await user.findOne({where : {email : req.body.params.email, password: req.body.params.password}})
   if(user2)
   {
     console.log("user exists")
+    return  res.status(200).json({token: "teste123"})
   }
   else
   {
     console.log("user does not exist")
   }
   //const user2 = await user.create(req.body.params)
-  //return  res.status(200).json(user2)
+  
 
 
 }

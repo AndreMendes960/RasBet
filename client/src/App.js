@@ -5,14 +5,22 @@ import Events from "./Events";
 import Registar from "./User/Registar"
 import Login from "./User/Login";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
+import useToken from './User/useToken'
 function App() {
+
+  const { token, setToken } = useToken();
+
+  if(!JSON.parse(sessionStorage.getItem('token'))) {
+    return <Login setToken={setToken} />
+  }
+
 return(
 
 <BrowserRouter>
       <Routes>
         <Route path="/events" element={<Events />} />
         <Route path="/registar" element={<Registar/>}></Route>
-        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/login" element={<Login setToken={setToken}/>}></Route>
       </Routes>
     </BrowserRouter>
 
