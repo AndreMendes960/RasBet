@@ -17,13 +17,13 @@ useEffect(()=>
 
 if (isLoading) {
     return <div className="App">Loading...</div>;
-  }
+}
   
   
-    return (
+return (
      <TestPage items={resources}></TestPage>
     );
-  }
+}
   
-  export default Events;
+export default Events;
   

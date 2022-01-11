@@ -1,10 +1,8 @@
 const { json } = require("express");
 //const { UUID } = require("sequelize/types");
 const models = require("../models")
-var uuid2 = require('uuid');
-var nodemailer = require('nodemailer');
 const { body } = require('express-validator');
-const {event} = require("../models")
+const {event, user} = require("../models")
 var file = require('./test.json');
 
 function sleep(ms) {
@@ -37,4 +35,31 @@ exports.testing2 = async function(req,res){
   //   )); 
   return res.status(200).json(file);
   
+}
+
+exports.registar = async function(req,res){
+
+  console.log(req.body.params)
+  const user2 = await user.create(req.body.params)
+  return  res.status(200).json(user2)
+
+
+}
+
+exports.login = async function(req,res){
+
+  const user2 = await user.findOne({where : {email : req.body.params.email, password: req.body.params.password}})
+  if(user2)
+  {
+    console.log("user exists")
+    return  res.status(200).json({token: "teste123"})
+  }
+  else
+  {
+    console.log("user does not exist")
+  }
+  //const user2 = await user.create(req.body.params)
+  
+
+
 }
