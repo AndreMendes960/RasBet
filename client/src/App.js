@@ -10,9 +10,9 @@ function App() {
 
   const { token, setToken } = useToken();
 
-  if(!JSON.parse(sessionStorage.getItem('token'))) {
-    return <Login setToken={setToken} />
-  }
+  // if(!JSON.parse(sessionStorage.getItem('token'))) {
+  //   return <Login setToken={setToken} />
+  // }
 
 return(
 

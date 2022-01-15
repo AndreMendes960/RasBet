@@ -27,6 +27,10 @@ module.exports = {
       password: {
       	allowNull: false,
       	type: Sequelize.STRING
+      },
+      wallet_id:{
+        type: Sequelize.UUID,
+        references :{ model: "wallet", key :"id"}
       }
     })
   },

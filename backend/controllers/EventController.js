@@ -2,7 +2,7 @@ const { json } = require("express");
 //const { UUID } = require("sequelize/types");
 const models = require("../models")
 const { body } = require('express-validator');
-const {event, user} = require("../models")
+const {event, user, wallet} = require("../models")
 var file = require('./test.json');
 
 function sleep(ms) {
@@ -40,7 +40,10 @@ exports.testing2 = async function(req,res){
 exports.registar = async function(req,res){
 
   console.log(req.body.params)
-  const user2 = await user.create(req.body.params)
+  data = req.body.params
+  const wallet2 = await wallet.create({amount : "100"});
+  data.wallet_id = wallet2.id
+  const user2 = await user.create(data)
   return  res.status(200).json(user2)
 
 
@@ -52,14 +55,11 @@ exports.login = async function(req,res){
   if(user2)
   {
     console.log("user exists")
-    return  res.status(200).json({token: "teste123"})
+    return  res.status(200).json({token: user2.id})
   }
   else
   {
     console.log("user does not exist")
   }
   //const user2 = await user.create(req.body.params)
-  
-
-
 }

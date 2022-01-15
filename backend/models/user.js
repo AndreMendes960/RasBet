@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const Sequelize = require('sequelize');
+const wallet = require('./wallet');
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
@@ -14,8 +15,15 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       allowNull: false,
       type: Sequelize.STRING
-    }
+    },
+
   });
+
+
+  user.associate = (models) => {
+    user.hasOne(models.wallet,{foreignKey : 'wallet_id'})
+  }
+  
 
   return user;
 };

@@ -2,12 +2,21 @@ import {useState } from "react"
 import {useRef} from 'react'
 import { sendLogin } from "../EventAPI";
 import PropTypes from 'prop-types';
+import {useNavigate} from "react-router-dom";
 import "./login.css"
+
+const DUMMYDATA = {
+  
+}
+
 
 function Login({setToken}) {
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+
+    const history = useNavigate()
+    
 
     const handleSubmit = (event) => 
     {
@@ -21,6 +30,7 @@ function Login({setToken}) {
 
     const handleRedirect = (event) => 
     {
+      history("/registar")
     }
 
 return (      
