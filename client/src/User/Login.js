@@ -3,9 +3,7 @@ import {useRef} from 'react'
 import { sendLogin } from "../EventAPI";
 import PropTypes from 'prop-types';
 import "./login.css"
-import {Routes, Route, BrowserRouter} from "react-router-dom";
-import Registar from "./Registar"
-import { Redirect } from 'react-router'
+
 function Login({setToken}) {
 
     const emailInputRef = useRef();
@@ -23,7 +21,6 @@ function Login({setToken}) {
 
     const handleRedirect = (event) => 
     {
-      return <Redirect to="/registar" />
     }
 
 return (      
