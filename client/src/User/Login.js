@@ -2,7 +2,10 @@ import {useState } from "react"
 import {useRef} from 'react'
 import { sendLogin } from "../EventAPI";
 import PropTypes from 'prop-types';
-
+import "./login.css"
+import {Routes, Route, BrowserRouter} from "react-router-dom";
+import Registar from "./Registar"
+import { Redirect } from 'react-router'
 function Login({setToken}) {
 
     const emailInputRef = useRef();
@@ -18,19 +21,32 @@ function Login({setToken}) {
         event.preventDefault()
     }
 
-return (
-     <form onSubmit={handleSubmit}>
-         Efetuar LOGIN
-        <label>
-          Email:
-          <input type="text" id="Email" ref={emailInputRef}/>
-        </label>
-        <label>
-          Password:
-          <input type="text" id="Password" ref={passwordInputRef}/>
-        </label>
-        <input type="submit" value="Submit" />
-     </form>
+    const handleRedirect = (event) => 
+    {
+      return <Redirect to="/registar" />
+    }
+
+return (      
+      <div className="login">
+        <div className="loginWrapper">
+          <div className="loginLeft">
+            <h3 className="loginLogo">RASBET</h3>
+          </div>
+          <div className="loginRight">
+            <form className="loginBox" >
+              <input className="loginInput" placeholder="Email" type="text" id="Email" ref={emailInputRef}/>
+              <input className="loginInput" placeholder="Password" type="text" id="Password" ref={passwordInputRef}/>
+              <input className="loginButton" type="submit" value="Submit" onClick={handleSubmit} />
+              <div className="loginOptBox">
+                <button className="loginRegisterButton" onClick={handleRedirect} >Create a new Account</button>
+                <button className="loginRegisterButton">Forgot Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    
     );
 }
   
