@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {useNavigate} from "react-router-dom";
 import "./login.css"
 
+
 const DUMMYDATA = {
   
 }
@@ -24,7 +25,7 @@ function Login({setToken}) {
         const enteredPassword = passwordInputRef.current.value
 
         sendLogin( enteredEmail, enteredPassword).then(response => setToken(response.token))
-
+        
         event.preventDefault()
     }
 

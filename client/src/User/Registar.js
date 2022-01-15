@@ -28,7 +28,7 @@ function Registar() {
           history("/login")
         }
         else {
-          console.log("pass mal")
+          console.log("Nao logado")
         }
         event.preventDefault()
         
