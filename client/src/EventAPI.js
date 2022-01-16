@@ -20,3 +20,7 @@ export function fetchCurrencies() {
 export function addCurrency(name) {
     return axios.post('/currencies', {params: { name }}).then(res => res.data);
 }
+
+export function addBet(name) {
+    return axios.post('/currencies', {params: { name }}).then(res => res.data);
+}

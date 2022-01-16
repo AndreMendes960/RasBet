@@ -18,7 +18,8 @@ function Login({setToken}) {
         const enteredEmail = emailInputRef.current.value
         const enteredPassword = passwordInputRef.current.value
 
-        sendLogin( enteredEmail, enteredPassword).then(response => /*setToken(response.token)*/ console.log(response.token))
+
+        sendLogin( enteredEmail, enteredPassword).then(response => setToken(response.id))
 
         event.preventDefault()
     }

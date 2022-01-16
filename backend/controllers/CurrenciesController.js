@@ -48,8 +48,6 @@ exports.registar = async function(req,res){
   data.wallet_id = wallet2.id
   const user2 = await user.create(data)
   return  res.status(200).json(user2)
-
-
 }
 
 exports.list = async function(req,res){
@@ -63,8 +61,6 @@ exports.list = async function(req,res){
 exports.create = async function(req,res){
 
     const list = await currency.findOne({where : {name : req.body.params.name}})
-    console.log(list)
-
     if (list != null)
     {
         return res.status(200).json({msg: "Already Exists"})
