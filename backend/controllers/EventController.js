@@ -2,7 +2,7 @@ const { json } = require("express");
 //const { UUID } = require("sequelize/types");
 const models = require("../models")
 const { body } = require('express-validator');
-const {event, user, wallet} = require("../models")
+const {event, user, wallet, currency} = require("../models")
 var file = require('./test.json');
 
 function sleep(ms) {
@@ -41,7 +41,10 @@ exports.registar = async function(req,res){
 
   console.log(req.body.params)
   data = req.body.params
-  const wallet2 = await wallet.create({amount : "100"});
+  const curr = await currency.findOne();
+  console.log(curr)
+  const curr2 = await currency.create({name : "Euros"})
+  const wallet2 = await wallet.create({amount : "100", currency_id : curr2.id});
   data.wallet_id = wallet2.id
   const user2 = await user.create(data)
   return  res.status(200).json(user2)
@@ -51,11 +54,11 @@ exports.registar = async function(req,res){
 
 exports.login = async function(req,res){
 
-  const user2 = await user.findOne({where : {email : req.body.params.email, password: req.body.params.password}})
+  const user2 = await user.findOne({where : {email : req.body.params.email, password: req.body.params.password}, include:{model: wallet, as : "wallet",}})
   if(user2)
   {
     console.log("user exists")
-    return  res.status(200).json({token: user2.id})
+    return  res.status(200).json(user2)
   }
   else
   {
