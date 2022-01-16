@@ -24,13 +24,8 @@ function Login({setToken}) {
         const enteredEmail = emailInputRef.current.value
         const enteredPassword = passwordInputRef.current.value
 
-<<<<<<< HEAD
-        sendLogin( enteredEmail, enteredPassword).then(response => setToken(response.token))
-        
-=======
         sendLogin( enteredEmail, enteredPassword).then(response => /*setToken(response.token)*/ console.log(response))
 
->>>>>>> 548a8c0cac0998204ce741f2fae037ae0570db07
         event.preventDefault()
     }
 

@@ -1,7 +1,6 @@
 .betBox{
     padding: 20px;
     align-items: center;
-   
 }
 
 .betWrapper{
@@ -11,7 +10,12 @@
     display: flex;
 
 }
+.betWrapper2{
+    background-color: rgb(36, 35, 35);
+    justify-content: center;
+    display: flex;
 
+}
 .betLeft{
     flex: 2;
     
