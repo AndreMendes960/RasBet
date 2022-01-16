@@ -7,7 +7,7 @@ function Left() {
         <div className="leftWrapper">
             <ul className="leftList">
                 <li className="leftListItem">
-                    
+                
                 </li>
             </ul>
         </div>
