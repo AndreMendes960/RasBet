@@ -67,8 +67,7 @@
     border: 1px solid gray;
     font-size: 18px;
     padding-left: 20px;
-    
-    
+    margin-right: 5px;
 }
 
 .loginButton{
@@ -112,7 +111,6 @@
     display: flex;
     flex:1;
     flex-direction:row ;
-    padding-left:20px;
     justify-content: space-between;
     display: flex;
 }

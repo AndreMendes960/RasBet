@@ -1,0 +1,9 @@
+.left{
+    flex: 1.7;
+    height: calc(100vh - 73px);
+    background-color:#353434;
+}
+
+.leftWrapper{
+    padding: 20px;
+}

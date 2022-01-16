@@ -10,6 +10,8 @@ function Registar() {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const passwordConfirmInputRef = useRef();
+    const checkBoxRef = useRef();
+    var checkBox=true;
     const history = useNavigate()
 
     const handleSubmit = (event) => 
@@ -18,14 +20,18 @@ function Registar() {
         const enteredEmail = emailInputRef.current.value
         const enteredPassword = passwordInputRef.current.value
         const passwordConfirm = passwordConfirmInputRef.current.value
+        checkBox = checkBoxRef.current.checked
         console.log(enteredName)
-        if (passwordConfirm==enteredPassword)
+        console.log(checkBox)
+        if (passwordConfirm==enteredPassword && checkBox==true){
           sendRegistar(enteredName, enteredEmail, enteredPassword)
+          history("/login")
+        }
         else {
-          console.log("pass mal")
+          console.log("Nao logado")
         }
         event.preventDefault()
-        history("/login")
+        
     }
 
     const handleRedirect = (event) => 
@@ -33,26 +39,23 @@ function Registar() {
       history("/registar")
     }
 
-
 return (
   <div className="login">
   <div className="loginWrapper">
     <div className="loginRight">
       <form className="loginBox" >
-        
           <h1 className="loginLabel">SIGN UP</h1>
-        
         <div className="registerTop">
           <input className="loginInput" placeholder="Name" type="text" id="name" ref={nameInputRef}/>
           <input className="loginInput" placeholder="Email" type="text" id="Email" ref={emailInputRef}/>
         </div>
         <div className="registerBot">
-          <input className="loginInput" placeholder="Password" type="text" id="Password" ref={passwordInputRef}/>
-          <input className="loginInput" placeholder="Confirm Password" type="text" id="ConfirmPassword" ref={passwordConfirmInputRef}/>
+          <input className="loginInput" placeholder="Password" type="Password" id="Password" ref={passwordInputRef}/>
+          <input className="loginInput" placeholder="Confirm Password" type="Password" id="ConfirmPassword" ref={passwordConfirmInputRef}/>
         </div>  
         <div className="registerTickBox">
-          <input className="registerCheckBox" type = "checkbox" id = "subscribeNews" name = "subscribe" value = "newsletter"/>
-          <label className="registerCheckBox" for = "subscribeNews" color="white"> I agree with terms of use and </ label>
+          <input className="registerCheckBox" type = "checkbox" id = "termsCheckBox" name = "termsCheckBox" ref={checkBoxRef}/>
+          <label className="registerCheckBox" for = "termsCheckBox"> I agree with terms of use and privacy </ label>
         </div> 
         <input className="loginButton" type="submit" value="Submit" onClick={handleSubmit} />
       </form>
