@@ -4,22 +4,17 @@ function Nav() {
 
     return (
       <div>
-        <nav class="navbar">
+        <nav className="navbar">
       
-        <div class="logo">RasBet</div>
+        <div className="logo">RasBet</div>
         
-        <ul class="nav-links">
+        <ul className="nav-links">
         
-            <div class="menu">
+        <div className="menu">
             <li><a href="/">Competitions</a></li>
             <li><a href="/">Sports</a></li>
             <li><a href="/">My Bets</a></li>
-            <li class="services">
-                <a href="/">Services</a>
-                <ul class="dropdown">
-                <li><a href="/">Exemplo se quisermos usar </a></li>     
-                </ul>
-            </li>
+
             <li><a href="/login">Login</a></li>
             <li><a href="/registar">Registar</a></li>
             </div>

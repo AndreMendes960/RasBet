@@ -6,9 +6,9 @@ function Middle(props) {
       <div className="middle">
        
         <ul>
-        {props.items.listEventsAll.map((item, index) => (
-            <Bet bet={item.event}></Bet>
-        ))}
+            {props.items.listEventsAll.map((item, index) => (
+                <Bet key={index} bet={item.event}></Bet>
+            ))}
         </ul>
     </div>  
         
