@@ -4,6 +4,7 @@ import {fetchEvents} from './EventAPI'
 import Events from "./Events";
 import Registar from "./User/Registar"
 import Login from "./User/Login";
+import CurrencyPage from "./Admin/CurrencyPage";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import useToken from './User/useToken'
 function App() {
@@ -21,6 +22,7 @@ return(
         <Route path="/events" element={<Events />} />
         <Route path="/registar" element={<Registar/>}></Route>
         <Route path="/login" element={<Login setToken={setToken}/>}></Route>
+        <Route path="/managecurrencies" element={<CurrencyPage/>}> </Route>
       </Routes>
     </BrowserRouter>
 

@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
 
 
   wallet.associate = (models) => {
-    wallet.belongsTo(models.user, {foreignKey: "user_id"})
+    wallet.hasOne(models.user, {foreignKey: "user_id"})
+    wallet.belongsTo(models.currency, {foreignKey: "currency_id"})
   }
   
 
