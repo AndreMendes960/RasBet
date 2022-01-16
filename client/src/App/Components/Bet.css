@@ -1,0 +1,54 @@
+.betBox{
+    padding: 20px;
+    align-items: center;
+   
+}
+
+.betWrapper{
+    padding: 20px;
+    background-color: rgb(49, 48, 48);
+    justify-content: center;
+    display: flex;
+
+}
+
+.betLeft{
+    flex: 2;
+    
+}
+
+.betMiddle{
+    flex: 3;
+    
+}
+
+.betRight{
+    flex: 2;
+    
+}
+
+.betButton{
+    color: rgb(255, 255, 255);
+    height: 30px;
+    width: 30%;
+    align-self: center;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(39, 38, 38);
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.untoggled-button {
+    /* background-image: green !important; */
+    background-color: green;
+    color: rgb(79, 221, 23);
+  }
+  .untoggled-button-active {
+    background-color: red;
+  }
+
+
+

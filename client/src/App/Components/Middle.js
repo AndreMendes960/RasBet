@@ -1,12 +1,12 @@
 import "./Middle.css"
-
+import Bet from './Bet';
 function Middle() {
 
     return (
       <div className="middle">
-        <div >
-            ola3
-        </div>
+        
+        <Bet></Bet>
+        
     </div>  
         
     );
