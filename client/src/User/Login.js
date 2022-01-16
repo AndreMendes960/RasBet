@@ -43,7 +43,7 @@ return (
           <div className="loginRight">
             <form className="loginBox" >
               <input className="loginInput" placeholder="Email" type="text" id="Email" ref={emailInputRef}/>
-              <input className="loginInput" placeholder="Password" type="text" id="Password" ref={passwordInputRef}/>
+              <input className="loginInput" placeholder="Password" type="Password" id="Password" ref={passwordInputRef}/>
               <input className="loginButton" type="submit" value="Submit" onClick={handleSubmit} />
               <div className="loginOptBox">
                 <button className="loginRegisterButton" onClick={handleRedirect} >Create a new Account</button>

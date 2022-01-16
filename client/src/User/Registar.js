@@ -50,8 +50,8 @@ return (
           <input className="loginInput" placeholder="Email" type="text" id="Email" ref={emailInputRef}/>
         </div>
         <div className="registerBot">
-          <input className="loginInput" placeholder="Password" type="text" id="Password" ref={passwordInputRef}/>
-          <input className="loginInput" placeholder="Confirm Password" type="text" id="ConfirmPassword" ref={passwordConfirmInputRef}/>
+          <input className="loginInput" placeholder="Password" type="Password" id="Password" ref={passwordInputRef}/>
+          <input className="loginInput" placeholder="Confirm Password" type="Password" id="ConfirmPassword" ref={passwordConfirmInputRef}/>
         </div>  
         <div className="registerTickBox">
           <input className="registerCheckBox" type = "checkbox" id = "termsCheckBox" name = "termsCheckBox" ref={checkBoxRef}/>
