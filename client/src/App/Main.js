@@ -26,7 +26,7 @@ function Main() {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-
+    console.log(JSON.parse(sessionStorage.getItem('token')));
     return (
        
         <div> 
