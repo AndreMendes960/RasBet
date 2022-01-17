@@ -2,11 +2,12 @@ import { useEffect, useState } from "react"
 import './App.css';
 import {fetchEvents} from './EventAPI'
 function TestPage(props) {
+  console.log(props);
   return (
       
     <div>
-        {props.items.listEventsAll.map((item, index) => (
-            <p>{item.event.team1}</p>
+        {props.items.map((item, index) => (
+            <p>{item.team1}</p>
         ))}
     </div>
   );

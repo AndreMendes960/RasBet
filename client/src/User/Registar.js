@@ -21,8 +21,6 @@ function Registar() {
         const enteredPassword = passwordInputRef.current.value
         const passwordConfirm = passwordConfirmInputRef.current.value
         checkBox = checkBoxRef.current.checked
-        console.log(enteredName)
-        console.log(checkBox)
         if (passwordConfirm==enteredPassword && checkBox==true){
           sendRegistar(enteredName, enteredEmail, enteredPassword)
           history("/login")
@@ -55,7 +53,7 @@ return (
         </div>  
         <div className="registerTickBox">
           <input className="registerCheckBox" type = "checkbox" id = "termsCheckBox" name = "termsCheckBox" ref={checkBoxRef}/>
-          <label className="registerCheckBox" for = "termsCheckBox"> I agree with terms of use and privacy </ label>
+          <label className="registerCheckBox" htmlFor = "termsCheckBox"> I agree with terms of use and privacy </ label>
         </div> 
         <input className="loginButton" type="submit" value="Submit" onClick={handleSubmit} />
       </form>
