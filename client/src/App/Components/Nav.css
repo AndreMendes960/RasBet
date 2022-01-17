@@ -25,6 +25,7 @@
    /* LOGO */
    .logo {
     font-size: 32px;
+    cursor: pointer;
    }
    /* NAVBAR MENU */
    .menu {
@@ -39,6 +40,7 @@
    }
    .menu li {
     padding: 5px 14px;
+    cursor: pointer;
    }
    /* DROPDOWN MENU */
    .services {
