@@ -12,7 +12,7 @@ function Bet( item ) {
     {
         const enteredAmount = amountInputRef.current.value
 
-        //sendBet( enteredAmount, currentAlignment, idDoMan, id do Evento).then(response => setToken(response.id))
+        //sendBet( enteredAmount, currentAlignment, idDoMan, item.bet.id).then(response => setToken(response.id))
 
         event.preventDefault()
     }
