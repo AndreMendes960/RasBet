@@ -8,14 +8,29 @@ import Nav from '.././App/Components/Nav';
 function UserPage() {
 
 return (      
-    <div> 
-    <Nav/>
-    <div className='homeContainer'>
-        <div>ola</div>
+    <div  > 
+        <Nav/>
+        
+        <div className='userContainer'> 
+            <div className="userWrapper">
+                <div className="userTop">
+                    <a className="userName">Manel</a>
+                    <div className="userTopWrapper">
+                        <button className="userButton">Depositar</button>
+                        <a className="userBalance">Balance</a>
+                        <button className="userButton">Withdraw</button>
+                    </div>
+                </div>
+                <div className="userBot">
+                    <button className="userButton">Betting History</button>
+                    <button className="userButton">Definitions</button>
+                    <button className="userButton">Logout</button>
+                </div>
+            </div>                
+    </div>
     </div>
    
-</div>
-    
+
     );
 }
 
