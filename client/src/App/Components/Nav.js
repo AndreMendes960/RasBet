@@ -14,11 +14,11 @@ function Nav() {
         {isLoggedIn ? (
         
         <div className="menu">
-            <li><a href="/">Competitions</a></li>
-            <li><a href="/">Sports</a></li>
-            <li><a href="/">My Bets</a></li>
-           
-            <li><a href={isLoggedIn}>{isLoggedIn}</a></li>
+            <li><a >Competitions</a></li>
+            <li><a >Sports</a></li>
+            <li><a >My Bets</a></li>
+            <li><a >Amount</a></li>
+            <li><a href="/user">{isLoggedIn}</a></li>
     
             </div>) :  
         <div className="menu">

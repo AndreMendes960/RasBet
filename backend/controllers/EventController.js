@@ -11,19 +11,19 @@ function sleep(ms) {
   }
 
 exports.testing = async function(req,res){
-    //var events =file.listEventsAll
-    // for (let k in events)
-    // {
-    //   await event.create({sport : events[k].event.sport,
-    //   type : events[k].event.type,
-    //   team1 : events[k].event.team1,
-    //   team2 : events[k].event.team2,
-    //   odd1 : events[k].event.result_odd.home,
-    //   odd2 : events[k].event.result_odd.tie,
-    //   odd3 : events[k].event.result_odd.away })
-    // }
+    var events =file.listEventsAll
+     for (let k in events)
+     {
+       await event.create({sport : events[k].event.sport,
+       type : events[k].event.type,
+       team1 : events[k].event.team1,
+       team2 : events[k].event.team2,
+       odd1 : events[k].event.result_odd.home,
+       odd2 : events[k].event.result_odd.tie,
+       odd3 : events[k].event.result_odd.away })
+     }
     var list = await event.findAll()
-    console.log(list)
+    //console.log(list)
   return res.status(200).json(list);
 }
 
