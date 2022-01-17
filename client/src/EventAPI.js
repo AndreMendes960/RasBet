@@ -24,3 +24,11 @@ export function addCurrency(name) {
 export function addBet(name) {
     return axios.post('/currencies', {params: { name }}).then(res => res.data);
 }
+
+export function fetchChanges(id) {
+    return axios.get('/changes', {params: { id }}).then(res => res.data); 
+}
+
+export function addChange(curr1, taxa, curr2){
+    return axios.post('/changes/add', {params: { curr1, taxa, curr2 }}).then(res => res.data); 
+}

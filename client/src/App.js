@@ -6,6 +6,7 @@ import Registar from "./User/Registar"
 import Login from "./User/Login";
 import Main from "./App/Main";
 import UserPage from "./User/UserPage"
+import Currency from "./Admin/Currency";
 import CurrencyPage from "./Admin/CurrencyPage";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import useToken from './User/useToken'
@@ -28,6 +29,7 @@ return(
         <Route path="/registar" element={<Registar/>}></Route>
         <Route path="/login" element={<Login setToken={setToken}/>}></Route>
         <Route path="/managecurrencies" element={<CurrencyPage/>}> </Route>
+        <Route path="/managecurrencies/:currencyId" element={<Currency/>}> </Route>
       </Routes>
     </BrowserRouter>
 
