@@ -14,7 +14,5 @@ module.exports = (sequelize, DataTypes) => {
   currency.associate = (models) => {
     currency.hasOne(models.wallet, {foreignKey: "wallet_id"})
   }
-  
-
   return currency;
 };

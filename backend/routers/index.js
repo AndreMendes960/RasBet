@@ -13,4 +13,6 @@ router.post('/registar', EventController.registar);
 router.post('/login', EventController.login); 
 router.get('/currencies', CurrenciesController.list); 
 router.post('/currencies', CurrenciesController.create); 
+router.get('/changes', CurrenciesController.fetchChanges); 
+router.post('/changes/add', CurrenciesController.addChanges); 
 module.exports = router;

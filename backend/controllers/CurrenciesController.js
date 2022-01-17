@@ -2,7 +2,7 @@ const { json } = require("express");
 //const { UUID } = require("sequelize/types");
 const models = require("../models")
 const { body } = require('express-validator');
-const {event, user, wallet, currency} = require("../models")
+const {event, user, wallet, currency, change} = require("../models")
 var file = require('./test.json');
 
 function sleep(ms) {
@@ -70,3 +70,27 @@ exports.create = async function(req,res){
     return  res.status(200).json(created)
     //const user2 = await user.create(req.body.params)
   }
+
+
+exports.fetchChanges = async function(req,res){
+
+  const items = await change.findAll();
+
+  return res.status(200).json(items);
+
+
+}
+
+exports.addChanges = async function(req,res){
+
+  console.log(req.body.params)
+
+  const exists = await currency.findOne({where : {name : req.body.params.curr2}})
+  console.log(exists);
+
+  const new1 = await change.create({taxa : req.body.params.taxa, currency1_id : req.body.params.curr1, currency2_id : exists.id, })
+
+  return res.status(200).json({msg : "yes"});
+
+
+}
