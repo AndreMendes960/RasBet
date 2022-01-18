@@ -10,7 +10,7 @@ function Login({setToken}) {
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-
+    const [flag, setFlag] = useState(false)
     const history = useNavigate()
 
     const handleSubmit = (event) => 
@@ -20,7 +20,9 @@ function Login({setToken}) {
 
 
         sendLogin( enteredEmail, enteredPassword).then(response => setToken(response.id))
-
+        if(JSON.parse(sessionStorage.getItem('token'))) history("/home");
+        else setFlag(true); 
+     
         event.preventDefault()
     }
  
@@ -40,6 +42,7 @@ return (
               <input className="loginInput" placeholder="Email" type="text" id="Email" ref={emailInputRef}/>
               <input className="loginInput" placeholder="Password" type="Password" id="Password" ref={passwordInputRef}/>
               <input className="loginButton" type="submit" value="Submit" onClick={handleSubmit} />
+              {flag===true && <a > Incorrect Password or Email</a>}
               <div className="loginOptBox">
                 <button className="loginRegisterButton"  onClick={handleRedirect} >Create a new Account</button>
                 <button className="loginRegisterButton">Forgot Password</button>

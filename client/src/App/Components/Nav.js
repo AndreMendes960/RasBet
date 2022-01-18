@@ -1,10 +1,36 @@
 import "./Nav.css"
 import {useNavigate} from "react-router-dom";
-
-function Nav() {
+import {fetchEvents, checkAdmin} from '../.././EventAPI';
+import { useEffect, useState } from "react"
+function Nav(props) {
 
     const isLoggedIn = JSON.parse(sessionStorage.getItem('token'));
     const history = useNavigate()
+
+    const [resources, setResources] = useState([]);
+    const [isLoading, setLoading] = useState(true)
+    const[isAdmin, setAdmin] = useState(false)
+
+    useEffect(()=>
+    {
+    fetchEvents().then(response => {
+        setResources(response)
+        checkAdmin(JSON.parse(sessionStorage.getItem('token'))).then(response=>{
+            if(response == "false")
+            {
+                setAdmin(false)
+            }
+            else
+            {
+                setAdmin(true)
+            }
+
+            setLoading(false);
+        })
+        
+    });   
+    }, [])
+
     const handleRedirect = (event) => 
     {
       history("/home")
@@ -13,8 +39,14 @@ function Nav() {
     {
       history("/user")
     }
+    const handleRedirect2 = (event) => 
+    {
+      history("/managecurrencies")
+    }
 
-
+    if (isLoading) {
+      return <div className="homeContainer">Loading...</div>;
+    }
     return (
       <div>
         <nav className="navbar">
@@ -28,6 +60,11 @@ function Nav() {
             <li><a >Competitions</a></li>
             <li><a >Sports</a></li>
             <li><a >My Bets</a></li>
+            {isAdmin && <li>
+              
+                <a onClick={handleRedirect2}>Currencies</a>
+             
+            </li>}
             <li><a >Amount</a></li>
             <li><a onClick={handleRedirect1}>{isLoggedIn}</a></li>
     

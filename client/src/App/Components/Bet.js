@@ -8,7 +8,11 @@ function Bet( props) {
     
     console.log(props)
     const amountInputRef = useRef();
+    const oddTeam1ChangeRef = useRef();
+    const oddDrawChangeRef = useRef();
+    const oddTeam2ChangeRef = useRef();
     const [currentAlignment, setCurrentAlignment] = useState(props.bet.id);
+    const [currentAlignmentWinner, setCurrentAlignmentWinner] = useState(props.bet.id);
     //console.log(currentAlignment);
 
     const handleSubmit = (event) => 
@@ -22,6 +26,17 @@ function Bet( props) {
         event.preventDefault()
     }
 
+    const handleSubmitAdmin = (event) => 
+    {
+        //const enteredAmount = amountInputRef.current.value
+
+        //addBet( enteredAmount, currentAlignment, JSON.parse(sessionStorage.getItem('token')), props.bet.id).then()
+
+        // console.log(currentAlignment)
+
+        //event.preventDefault()
+    }
+
 
     return (
       <div className="betBox">
@@ -30,19 +45,19 @@ function Bet( props) {
             { (props.bet.sport==='soccer') ? ( <div className="betLeft"><SportsSoccerIcon color='warning'/> </div>) : <div className="betLeft">{props.bet.sport}</div> }
            
 
-            <div className="betMiddle">
+            {!props.isAdmin && <div className="betMiddle">
                 <ToggleButtonGroup className="betWrapper2" fullWidth value={currentAlignment} onChange={(event, newAlignment) => {setCurrentAlignment(newAlignment);}} exclusive>
                     <ToggleButton className="betButton"  size="small" value={"team1"} aria-label="HOME">{props.bet.team1} - {props.bet.odd1}</ToggleButton>
                     <ToggleButton className="betButton"  size="small" value={"draw"} aria-label="DRAW">DRAW - {props.bet.odd2}</ToggleButton>
                     <ToggleButton className="betButton"  size="small" value={"team2"} aria-label="AWAY">{props.bet.team2} - {props.bet.odd3}</ToggleButton>
                 </ToggleButtonGroup>
-            </div>
+            </div>}
                
                {/* OMITIR CASO SEJA ADMIN */}
             {!props.isAdmin &&<div className="betRight">
                 <div className="betWrapper3">
                    
-                    <input className="betInput" type="number" placeholer="Amount" ref={amountInputRef}></input>
+                    <input className="betInput" type="number" placeholder="Amount" ref={amountInputRef}></input>
                     <button className="betButton" onClick={handleSubmit}>BET</button>
                 </div>
               
@@ -50,7 +65,23 @@ function Bet( props) {
              
             {/* CASO SEJA ADMIN PODE SIMPLESMENTE EDITAR - INSERIR BOTÃO PARA EDITAR OU EDITAR "INLINE" - CAIXA DE TEXTO PARA CADA ODD E BOTÃO PARA TERMINAR EVENTO*/}
 
-            {props.isAdmin && <p>IS ADMIN</p>}
+            {props.isAdmin && <div className="betMiddle">
+                <ToggleButtonGroup className="betWrapper2" fullWidth value={currentAlignmentWinner} onChange={(event, newAlignmentWinner) => {setCurrentAlignmentWinner(newAlignmentWinner);}} exclusive>
+                    <ToggleButton className="betButton"  size="small" value={"team1W"} aria-label="HOMEW">{props.bet.team1} - {props.bet.odd1}</ToggleButton>
+                    <ToggleButton className="betButton"  size="small" value={"drawW"} aria-label="DRAWW">DRAW - {props.bet.odd2}</ToggleButton>
+                    <ToggleButton className="betButton"  size="small" value={"team2W"} aria-label="AWAYW">{props.bet.team2} - {props.bet.odd3}</ToggleButton>
+                </ToggleButtonGroup>
+            </div>}
+               
+
+            {props.isAdmin && <div className="betRight">
+            <div className="betWrapper3">
+                    <input className="betInput" type="number" placeholder="1" ref={oddTeam1ChangeRef}></input>
+                    <input className="betInput" type="number" placeholder="D" ref={oddDrawChangeRef}></input>
+                    <input className="betInput" type="number" placeholder="2" ref={oddTeam2ChangeRef}></input>
+                    <button className="betButton" onClick={handleSubmitAdmin}>OK</button>
+                    </div>
+                </div>}
         </div> 
     </div>  
         

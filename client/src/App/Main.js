@@ -42,9 +42,11 @@ function Main() {
     return (
        
         <div> 
-            <Nav/>
+            <Nav isAdmin={isAdmin}/>
             <div className='homeContainer'>
-                <Left />
+                <Left isAdmin={isAdmin}> 
+                    
+                </Left>
                 <Middle isAdmin={isAdmin} items={resources}/>
             </div>
            

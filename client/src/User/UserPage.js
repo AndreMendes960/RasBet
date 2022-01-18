@@ -8,7 +8,20 @@ import Nav from ".././App/Components/Nav";
 function UserPage() {
   const [user, setUser] = useState();
   const[loading, setLoading] = useState(true)
+  const history = useNavigate()
 
+  const handleRedirectDeposit = (event) => 
+    {
+      history("/deposit")
+    }
+    const handleRedirectConvert = (event) => 
+    {
+      history("/convert")
+    }  
+    const handleLogout = (event) => 
+    {
+      
+    }
   useEffect(() => {
     fetchUser(JSON.parse(sessionStorage.getItem('token'))).then((response) => {
       setUser(response);
@@ -33,15 +46,16 @@ function UserPage() {
               <div className="userTop">
                 <a className="userName">{user.name}</a>
                 <div className="userTopWrapper">
-                  <button className="userButton">Depositar</button>
+                  <button className="userButton" onClick={handleRedirectDeposit}>Depositar</button>
                   <a className="userBalance">{user.wallet.amount} {user.wallet.currency.name} </a>
-                  <button className="userButton">Withdraw</button>
+                  <button className="userButton" onClick={handleRedirectConvert}>Convert</button>
                 </div>
               </div>
               <div className="userBot">
+                <button className="userButton">Withdraw</button>
                 <button className="userButton">Betting History</button>
                 <button className="userButton">Definitions</button>
-                <button className="userButton">Logout</button>
+                <button className="userButton" onClick={handleLogout}>Logout</button>
               </div>
             </div>
           </div>

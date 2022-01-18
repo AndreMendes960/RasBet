@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react"
 import '../App.css';
 import { addCurrency } from "../EventAPI";
 import {useNavigate} from "react-router-dom";
+import "./CurrencyList.css"
+
 function CurrencyList(props) {
 
     const nameInputRef = useRef();
@@ -21,17 +23,25 @@ function CurrencyList(props) {
 
   return (
       
-    <div>
+    <div className="currencyBox">
+       <div className='currencyLeftBox'>
         {props.items.map((item, index) => (
-            <div>
-            <p>{item.name}</p>
-            <button onClick={() => Edit(item.id)}> Editar Taxas</button>
+            <div className='currencyLeftBoxWrapper'>
+              <p className="currencyLogo">{item.name}</p>
+              <button className="currencyButton" onClick={() => Edit(item.id)}> Editar Taxas</button>
             </div>
         ))}
-            <form>
-              <input placeholder="Currency" type="text" id="Email" ref={nameInputRef}/>
-              <input type="submit" value="Submit" onClick={handleSubmit} />
+        </div>
+       
+            <form className='currencyRightBox'>
+              <p className="currencyLogo">Insert new coin</p>
+              <div className="currencySubmitBox">
+                <input  className="currencyInput" placeholder="Currency" type="text" id="Email" ref={nameInputRef}/>
+                <input className="currencyButton" type="submit" value="Submit" onClick={handleSubmit} />
+              </div>
+              
             </form>
+               
     </div>
   );
 }
