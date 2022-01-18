@@ -23,7 +23,9 @@
 
 }
 .betLeft{
-    flex: 0.3;
+    flex: 0.8;
+    flex-direction: row;
+    display: flex;
     
 }
 
@@ -73,4 +75,13 @@ border-color: #000 !important;
     background-color: rgb(39, 38, 38);
 }
 
+.betText{
+    font-size: 15px;
+    font-weight: 500;
+    color:rgb(245, 241, 237);
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+}
 

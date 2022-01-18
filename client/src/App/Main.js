@@ -53,7 +53,7 @@ function Main() {
     <div>
       <Nav isAdmin={isAdmin} />
       <div className="homeContainer">
-        <Left isAdmin={isAdmin}></Left>
+        {isAdmin && <Left isAdmin={isAdmin}></Left>}
         <Middle isAdmin={isAdmin} items={resources} />
       </div>
     </div>

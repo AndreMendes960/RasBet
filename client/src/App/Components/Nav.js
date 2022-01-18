@@ -2,37 +2,26 @@ import "./Nav.css"
 import {useNavigate} from "react-router-dom";
 import {fetchEvents, checkAdmin} from '../.././EventAPI';
 import { useEffect, useState } from "react"
+import { fetchUser, sendLogin } from "../.././EventAPI";
 function Nav(props) {
 
     const isLoggedIn = JSON.parse(sessionStorage.getItem('token'));
     const history = useNavigate()
 
     const [resources, setResources] = useState([]);
+    const [user, setUser] = useState();
     const [isLoading, setLoading] = useState(true)
     const[isAdmin, setAdmin] = useState(false)
-
-    useEffect(()=>
-    {
-    fetchEvents().then(response => {
-        setResources(response)
-        // checkAdmin(JSON.parse(sessionStorage.getItem('token'))).then(response=>{
-        //     if(response == "false")
-        //     {
-        //         setAdmin(false)
-        //     }
-        //     else
-        //     {
-        //         setAdmin(true)
-        //     }
-
-        //     setLoading(false);
-        // })
-
+    
+    useEffect(() => {
+      if(isLoggedIn != null){
+      fetchUser(JSON.parse(sessionStorage.getItem('token'))).then((response) => {
+        setUser(response);
+        console.log(response)
         setLoading(false)
-        
-    });   
-    }, [])
-
+      });
+    }}, []);
+  
     const handleRedirect = (event) => 
     {
       history("/home")
@@ -44,6 +33,11 @@ function Nav(props) {
     const handleRedirect2 = (event) => 
     {
       history("/managecurrencies")
+    }
+
+    const handleRedirectMybets = (event) => 
+    {
+      history("/mybets")
     }
 
     if (isLoading) {
@@ -59,16 +53,14 @@ function Nav(props) {
         {isLoggedIn ? (
         
         <div className="menu">
-            <li><a >Competitions</a></li>
-            <li><a >Sports</a></li>
-            <li><a >My Bets</a></li>
+            <li ><a onClick={handleRedirectMybets}>My Bets</a></li>
             {isAdmin && <li>
               
                 <a onClick={handleRedirect2}>Currencies</a>
              
             </li>}
-            <li><a >Amount</a></li>
-            <li><a onClick={handleRedirect1}>{isLoggedIn}</a></li>
+            <li><a >{user.wallet.amount} {user.wallet.currency.name}</a></li>
+            <li><a onClick={handleRedirect1}>{user.name}</a></li>
     
             </div>) :  
         <div className="menu">
