@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { addEvento } from "../../EventAPI";
+import { addEvento, fetchAPI } from "../../EventAPI";
 import "./Left.css"
 
 function Left(props) {
@@ -21,6 +21,11 @@ function Left(props) {
         const odd2Input = odd2.current.value
 
         addEvento(team1Input, team2Input, tipoInput, odd1Input, oddDrawInput, odd2Input)
+
+    }
+    const submit2 = () => {
+
+        fetchAPI()
 
     }
 
@@ -47,6 +52,13 @@ function Left(props) {
             </div>     
                     
         </div>}
+
+        <div className="leftCampWrapper"> 
+        <button onClick={submit2} className="partidaButton" >Fetch API Data</button>    
+            </div> 
+
+        
+
     </div>  
         
     );

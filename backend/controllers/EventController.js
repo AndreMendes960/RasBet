@@ -11,6 +11,12 @@ function sleep(ms) {
 }
 
 exports.testing = async function (req, res) {
+  var list = await event.findAll();
+  //console.log(list)
+  return res.status(200).json(list);
+};
+
+exports.addAPI = async function(req, res){
   var events = file.listEventsAll;
   for (let k in events) {
     const check = await event.findOne({where : {team1 : events[k].event.team1, status : "ongoing"}})
@@ -33,10 +39,7 @@ exports.testing = async function (req, res) {
     });
     }
   }
-  var list = await event.findAll();
-  //console.log(list)
-  return res.status(200).json(list);
-};
+}
 
 exports.testing2 = async function (req, res) {
   //let events = json(file)
@@ -101,17 +104,32 @@ exports.add = async function (req, res) {
     },
   });
   req.body.params.currency_id = user2.wallet.currency.id
+  if (user2.wallet.amount < req.body.params.amount)
+  {
+    console.log("n tens creditos man")
+    return res.status(200).json({msg : "Sem créditos suficientes"})
+  }
+
+  const aux2 =parseFloat(user2.wallet.amount)
+  const aux3 =parseFloat(req.body.params.amount)
+  final = aux2-aux3
   const bet = await aposta.create(req.body.params);
+  wallet.update({amount : final}, {where:{  id : user2.wallet.id }})
   //user2.wallet.amout = user2.wallet.amount - req.body.params.
   console.log(bet);
   console.log(req.body.params);
+  return res.status(200).json({msg : "sucesso"})
 };
 
 exports.checkAdmin = async function (req, res) {
   console.log(req.params)
+  if(req.params.id == 'null')
+  {
+    console.log("not logged in")
+    return res.status(200).json(false);
+  }
   const user2 = await user.findOne({
     where: { id: req.params.id }});
-  console.log(user2);
   return res.status(200).json(user2.isAdmin);
 };
 
@@ -141,25 +159,49 @@ exports.addResultado = async function (req, res) {
           include: { model: currency, as: "currency" },
         },
       });
-      console.log(user2)
+      
 
       const aux1 =parseFloat(user2.wallet.amount)
       const aux2 =parseFloat(bets[k].amount)
       const aux3 =parseFloat(event2.odd3)
-      const profit = aux1 + (aux2*aux3)
+      let profit = aux1 + (aux2*aux3)
 
-      if(event2.result == "team2")
+      if(bets[k].currency_id == user2.wallet.currency_id)
       {
-        wallet.update({amount: profit}, {where: {id : user2.wallet_id}})
-      }
-      else if(event2.result == "team1")
-      {
-        wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+        if(event2.result == "team2")
+        {
+          wallet.update({amount: profit}, {where: {id : user2.wallet_id}})
+        }
+        else if(event2.result == "team1")
+        {
+          wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+        }
+        else
+        {
+          wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+        }
       }
       else
       {
-        wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+        const ratio = await change.findOne({where : {currency1_id : bets[k].currency_id, currency2_id: user2.wallet.currency_id}})
+        const taxa = parseFloat(ratio.taxa)
+        profit = profit * taxa
+
+        if(event2.result == "team2")
+        {
+          wallet.update({amount: profit}, {where: {id : user2.wallet_id}})
+        }
+        else if(event2.result == "team1")
+        {
+          wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+        }
+        else
+        {
+          wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+        }
       }
+
+      
     }
   }
 
@@ -202,7 +244,7 @@ exports.convert = async function (req, res) {
   const user2 = await user.findOne({where:{id : req.body.params.userid}, include: {model: wallet, as: "wallet"}})
   const curr = await currency.findOne({where: {name : req.body.params.currency}})
 
-  const change2 = await change.findOne({where:{ currency1_id: curr.id, currency2_id : user2.wallet.currency_id}})
+  const change2 = await change.findOne({where:{ currency1_id: user2.wallet.currency_id, currency2_id : curr.id}})
   if(change2)
   {
     const aux1 =parseFloat(user2.wallet.amount)
