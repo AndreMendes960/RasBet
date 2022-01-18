@@ -54,7 +54,7 @@ function Left(props) {
         </div>}
 
         <div className="leftCampWrapper"> 
-        <button onClick={submit2} className="partidaButton" >Fetch API Data</button>    
+            <button onClick={submit2} className="partidaButton" >Fetch API Data</button>    
             </div> 
 
         

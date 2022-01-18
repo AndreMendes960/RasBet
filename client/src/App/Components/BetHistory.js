@@ -17,7 +17,7 @@ function BetHistory(props ) {
                <a className="betHistoryLogo">{props.items.event.team1} vs {props.items.event.team2}</a> 
             </div>
            <div className="betHistoryMiddle">
-           {(props.items.equipa_apostada == "team1") ? (<a className="betHistoryGreen">{props.items.event.team2}</a>) : <></>}
+           {(props.items.equipa_apostada == "team1") ? (<a className="betHistoryGreen">{props.items.event.team1}</a>) : <></>}
            {(props.items.equipa_apostada == "draw") ? (<a className="betHistoryGreen">Empate</a>) : <></>}
            {(props.items.equipa_apostada == "team2") ? (<a className="betHistoryGreen">{props.items.event.team2}</a>) : <></>}
                </div>    
@@ -28,11 +28,11 @@ function BetHistory(props ) {
                 {(props.items.equipa_apostada == "team2") ? (<a className="betHistoryLogo">odd : {props.items.event.odd3}</a>) : <></>}
                </div>
                <div className='betHistoryAmount'>
-               {(props.items.event.status == "ended" && props.items.event.result == props.items.equipa_apostada && props.items.event.result == "team1" ) ? (<a className="betHistoryLogo">Ganhos :{props.items.event.odd1 * props.items.amount}</a>) : <></>}
-               {(props.items.event.status == "ended" && props.items.event.result == props.items.equipa_apostada  && props.items.event.result == "draw") ? (<a className="betHistoryLogo">Ganhos :{props.items.event.odd2 * props.items.amount}</a>) : <></>}
-               {(props.items.event.status == "ended" && props.items.event.result == props.items.equipa_apostada  && props.items.event.result == "team2") ? (<a className="betHistoryLogo">Ganhos :{props.items.event.odd3 * props.items.amount}</a>) : <></>}
-               {(props.items.event.status == "ended" && props.items.event.result != props.items.equipa_apostada ) ? (<a className="betHistoryLogo">Perdas :{props.items.amount}</a>) : <></>}
-               {(props.items.event.status == "ongoing" ) ? (<a className="betHistoryLogo">Em andamento</a>) : <></>}
+               {(props.items.event.status == "ended" && props.items.event.result == props.items.equipa_apostada && props.items.event.result == "team1" ) ? (<a className="betHistoryLogo">Winnings :{props.items.event.odd1 * props.items.amount}</a>) : <></>}
+               {(props.items.event.status == "ended" && props.items.event.result == props.items.equipa_apostada  && props.items.event.result == "draw") ? (<a className="betHistoryLogo">Winnings :{props.items.event.odd2 * props.items.amount}</a>) : <></>}
+               {(props.items.event.status == "ended" && props.items.event.result == props.items.equipa_apostada  && props.items.event.result == "team2") ? (<a className="betHistoryLogo">Winnings :{props.items.event.odd3 * props.items.amount}</a>) : <></>}
+               {(props.items.event.status == "ended" && props.items.event.result != props.items.equipa_apostada ) ? (<a className="betHistoryLogo">Loss :{props.items.amount}</a>) : <></>}
+               {(props.items.event.status == "ongoing" ) ? (<a className="betHistoryLogo">Ongoing</a>) : <></>}
                </div>
             </div>   
         </div>

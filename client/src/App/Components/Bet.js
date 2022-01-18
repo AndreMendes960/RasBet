@@ -3,7 +3,7 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useEffect, useState, useRef } from "react"
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Select from 'react-select';
-import { addBet, addResultado } from "../../EventAPI";
+import { addBet, addResultado, updateOdds } from "../../EventAPI";
 function Bet( props) {
 
     const amountInputRef = useRef();
@@ -30,6 +30,23 @@ function Bet( props) {
 
         console.log(currentAlignmentWinner)
         addResultado(id, currentAlignmentWinner)
+        //const enteredAmount = amountInputRef.current.value
+
+        //addBet( enteredAmount, currentAlignment, JSON.parse(sessionStorage.getItem('token')), props.bet.id).then()
+
+        // console.log(currentAlignment)
+
+        //event.preventDefault()
+    }
+
+    const handleUpdate = (id) => 
+    {
+
+        const odd1Input = oddTeam1ChangeRef.current.value
+        const odd2Input = oddDrawChangeRef.current.value
+        const odd3Input = oddTeam2ChangeRef.current.value
+        updateOdds(id, odd1Input, odd2Input, odd3Input)
+        //addResultado(id, currentAlignmentWinner)
         //const enteredAmount = amountInputRef.current.value
 
         //addBet( enteredAmount, currentAlignment, JSON.parse(sessionStorage.getItem('token')), props.bet.id).then()
@@ -83,9 +100,10 @@ function Bet( props) {
 
             {props.isAdmin && <div className="betRight">
             <div className="betWrapper3">
-                    <input className="betInput" type="number" placeholder="1" ref={oddTeam1ChangeRef}></input>
-                    <input className="betInput" type="number" placeholder="D" ref={oddDrawChangeRef}></input>
-                    <input className="betInput" type="number" placeholder="2" ref={oddTeam2ChangeRef}></input>
+                    <input className="betInput" type="text" placeholder="1" defaultValue={props.bet.odd1} ref={oddTeam1ChangeRef}></input>
+                    <input className="betInput"  placeholder="D" defaultValue={props.bet.odd2} ref={oddDrawChangeRef}></input>
+                    <input className="betInput"  placeholder="2" defaultValue={props.bet.odd3} ref={oddTeam2ChangeRef}></input>
+                    <button className="betButton" onClick={() => handleUpdate(props.bet.id)}>Atualizar</button>
                     <button className="betButton" onClick={() => handleSubmitAdmin(props.bet.id)}>OK</button>
                     </div>
                 </div>}
@@ -134,9 +152,10 @@ function Bet( props) {
    
                {props.isAdmin && <div className="betRight">
                <div className="betWrapper3">
-                       <input className="betInput" type="number" placeholder="1" ref={oddTeam1ChangeRef}></input>
-                       <input className="betInput" type="number" placeholder="D" ref={oddDrawChangeRef}></input>
-                       <input className="betInput" type="number" placeholder="2" ref={oddTeam2ChangeRef}></input>
+               <input className="betInput"  placeholder="1" defaultValue={props.bet.odd1} ref={oddTeam1ChangeRef}></input>
+                    <input className="betInput"  placeholder="D" defaultValue={props.bet.odd2} ref={oddDrawChangeRef}></input>
+                    <input className="betInput"  placeholder="2" defaultValue={props.bet.odd3} ref={oddTeam2ChangeRef}></input>
+                       <button className="betButton" onClick={() => handleUpdate(props.bet.id)}>Atualizar</button>
                        <button className="betButton" onClick={() => handleSubmitAdmin(props.bet.id)}>OK</button>
                        </div>
                    </div>}

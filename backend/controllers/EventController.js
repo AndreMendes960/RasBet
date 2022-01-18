@@ -95,6 +95,7 @@ exports.fetch = async function (req, res) {
 };
 
 exports.add = async function (req, res) {
+  console.log(req.body.params)
   const user2 = await user.findOne({
     where: { id: req.body.params.user_id },
     include: {
@@ -284,4 +285,15 @@ exports.listApostas = async function (req, res) {
   const bets = await aposta.findAll({where : {user_id : user2.id}, include : {model: event, as: "event"}})
   //console.log(bets)
   return res.status(200).json(bets);
+};
+
+exports.updateOdds = async function (req, res) {
+  const eve = await event.findOne({where : {id : req.params.id}})
+
+  console.log(req.body.params)
+  event.update({odd1 : req.body.params.odd1Input, odd2 : req.body.params.odd2Input, odd3 : req.body.params.odd3Input}, {where: {id : eve.id}})
+
+  return res.status(200).json()
+
+
 };

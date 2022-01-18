@@ -66,3 +66,7 @@ export function fetchApostas(id){
 export function fetchAPI(){
     return axios.post(`/getAPI`).then(res => res.data)
 }
+
+export function updateOdds(id, odd1Input, odd2Input, odd3Input){
+    return axios.put(`/apostas/${id}` , {params: { odd1Input, odd2Input, odd3Input}}).then(res => res.data)
+}

@@ -19,6 +19,7 @@ router.get('/changes/:id', CurrenciesController.fetchChanges);
 router.post('/changes/add', CurrenciesController.addChanges); 
 router.get('/user/check/:id', EventController.checkAdmin); 
 router.get('/apostas/:id', EventController.listApostas); 
+router.put('/apostas/:id', EventController.updateOdds); 
 
 router.post('/events/add', EventController.addEvent); 
 router.post('/events/add/result', EventController.addResultado); 
