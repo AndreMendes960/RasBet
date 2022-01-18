@@ -15,17 +15,12 @@ function Main() {
   const [isLogged, setLogged] = useState(true);
 
   useEffect(() => {
-    if (JSON.parse(sessionStorage.getItem("token")) == null)
-    {
-        console.log("Not logged in")
-        setLogged(false)
-    }
     fetchEvents().then((response) => {
       setResources(response);
-      if (isLogged) {
+      console.log(isLogged)
+      if (JSON.parse(sessionStorage.getItem("token")) != null) {
           checkAdmin(JSON.parse(sessionStorage.getItem("token"))).then(
         (response) => {
-            console.log(response)
           if (response == "false") {
             setAdmin(false);
           } else {
@@ -36,6 +31,7 @@ function Main() {
         }
       );
     } else {
+      console.log("not logged in")
         setAdmin(false);
         setLoading(false);
     }

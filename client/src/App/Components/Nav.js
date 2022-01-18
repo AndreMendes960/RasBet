@@ -7,8 +7,6 @@ function Nav(props) {
 
     const isLoggedIn = JSON.parse(sessionStorage.getItem('token'));
     const history = useNavigate()
-
-    const [resources, setResources] = useState([]);
     const [user, setUser] = useState();
     const [isLoading, setLoading] = useState(true)
     const[isAdmin, setAdmin] = useState(false)
@@ -20,7 +18,9 @@ function Nav(props) {
         console.log(response)
         setLoading(false)
       });
-    }}, []);
+    }
+    setLoading(false)
+  }, []);
   
     const handleRedirect = (event) => 
     {
@@ -59,8 +59,8 @@ function Nav(props) {
                 <a onClick={handleRedirect2}>Currencies</a>
              
             </li>}
-            <li><a >{user.wallet.amount} {user.wallet.currency.name}</a></li>
-            <li><a onClick={handleRedirect1}>{user.name}</a></li>
+            {(user != null) ? <li><a >{user.wallet.amount} {user.wallet.currency.name}</a></li> : <></>}
+            {(user!= null) ? <li><a onClick={handleRedirect1}>{user.name}</a></li> : <></>}
     
             </div>) :  
         <div className="menu">
