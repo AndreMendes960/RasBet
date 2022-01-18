@@ -10,9 +10,13 @@ var router = express.Router();
 
 router.get('/testing', EventController.testing); 
 router.post('/registar', EventController.registar); 
+router.get('/user/:userid', EventController.fetch); 
 router.post('/login', EventController.login); 
 router.get('/currencies', CurrenciesController.list); 
 router.post('/currencies', CurrenciesController.create); 
-router.get('/changes', CurrenciesController.fetchChanges); 
+router.post('/addBet', EventController.add); 
+router.get('/changes/:id', CurrenciesController.fetchChanges); 
 router.post('/changes/add', CurrenciesController.addChanges); 
+router.get('/user/check/:id', EventController.checkAdmin); 
+
 module.exports = router;

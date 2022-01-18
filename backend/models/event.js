@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
     odd3: {
       allowNull: false,
       type: Sequelize.FLOAT
+    },
+    status: {
+      allowNull: false,
+      type : Sequelize.STRING
     }
   });
 

@@ -53,7 +53,7 @@ exports.registar = async function(req,res){
 exports.list = async function(req,res){
 
   const list = await currency.findAll()
-  console.log(list)
+  //console.log(list)
   return  res.status(200).json(list)
   //const user2 = await user.create(req.body.params)
 }
@@ -74,7 +74,8 @@ exports.create = async function(req,res){
 
 exports.fetchChanges = async function(req,res){
 
-  const items = await change.findAll();
+  console.log(req.params)
+  const items = await change.findAll({where : {currency1_id : req.params.id}, include: {model : currency, as : "currency"}});
 
   return res.status(200).json(items);
 
