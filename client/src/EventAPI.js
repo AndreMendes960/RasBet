@@ -21,14 +21,22 @@ export function addCurrency(name) {
     return axios.post('/currencies', {params: { name }}).then(res => res.data);
 }
 
-export function addBet(name) {
-    return axios.post('/currencies', {params: { name }}).then(res => res.data);
+export function addBet(amount, equipa_apostada, user_id, event_id) {
+    return axios.post('/addBet', {params: { amount, equipa_apostada, user_id, event_id }}).then(res => res.data);
 }
 
 export function fetchChanges(id) {
-    return axios.get('/changes', {params: { id }}).then(res => res.data); 
+    return axios.get(`/changes/${id}`,).then(res => res.data); 
 }
 
 export function addChange(curr1, taxa, curr2){
     return axios.post('/changes/add', {params: { curr1, taxa, curr2 }}).then(res => res.data); 
+}
+
+export function fetchUser(userid) {
+    return axios.get(`/user/${userid}`).then(res => res.data);
+}
+
+export function checkAdmin(id){
+    return axios.get(`/user/check/${id}`).then(res => res.data)
 }

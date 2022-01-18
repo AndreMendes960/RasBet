@@ -1,38 +1,54 @@
-import {useState } from "react"
-import {useRef} from 'react'
-import { sendLogin } from "../EventAPI";
-import PropTypes from 'prop-types';
-import {useNavigate} from "react-router-dom";
-import "./userPage.css"
-import Nav from '.././App/Components/Nav';
+import { useState, useEffect } from "react";
+import { useRef } from "react";
+import { fetchUser, sendLogin } from "../EventAPI";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import "./userPage.css";
+import Nav from ".././App/Components/Nav";
 function UserPage() {
+  const [user, setUser] = useState();
+  const[loading, setLoading] = useState(true)
 
-return (      
-    <div  > 
-        <Nav/>
-        
-        <div className='userContainer'> 
+  useEffect(() => {
+    fetchUser(JSON.parse(sessionStorage.getItem('token'))).then((response) => {
+      setUser(response);
+      console.log(response)
+      setLoading(false)
+    });
+  }, []);
+
+
+ if (loading)
+ {
+     return( <div>Loading ...</div>)
+ }
+ else
+ {
+    return (
+        <div>
+          <Nav />
+    
+          <div className="userContainer">
             <div className="userWrapper">
-                <div className="userTop">
-                    <a className="userName">Manel</a>
-                    <div className="userTopWrapper">
-                        <button className="userButton">Depositar</button>
-                        <a className="userBalance">Balance</a>
-                        <button className="userButton">Withdraw</button>
-                    </div>
+              <div className="userTop">
+                <a className="userName">{user.name}</a>
+                <div className="userTopWrapper">
+                  <button className="userButton">Depositar</button>
+                  <a className="userBalance">{user.wallet.amount} {user.wallet.currency.name} </a>
+                  <button className="userButton">Withdraw</button>
                 </div>
-                <div className="userBot">
-                    <button className="userButton">Betting History</button>
-                    <button className="userButton">Definitions</button>
-                    <button className="userButton">Logout</button>
-                </div>
-            </div>                
-    </div>
-    </div>
-   
+              </div>
+              <div className="userBot">
+                <button className="userButton">Betting History</button>
+                <button className="userButton">Definitions</button>
+                <button className="userButton">Logout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+ }
 
-    );
 }
-
 
 export default UserPage;

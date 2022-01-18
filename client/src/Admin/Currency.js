@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import '../App.css';
 import { addChange, fetchChanges, fetchCurrencies } from "../EventAPI";
 import { useParams } from "react-router-dom";
+
 function Currency(props) {
 
     const taxaInputRef = useRef();
@@ -17,6 +18,7 @@ function Currency(props) {
     {
         fetchChanges(currencyId).then(response => {
       setChanges(response)
+      console.log(response)
       setLoading(false);
     }).then(fetchCurrencies().then(response => { setCurrencies(response)} ));   
     }, [])
@@ -29,18 +31,29 @@ function Currency(props) {
         event.preventDefault();
     }
 
-  return (
+  if (isLoading)
+  {
+    return (<div>Loading...</div>)
+  }
+  else
+  {
+    return (
       
-    <div>
-     {/* <CurrencyList items={currencies}></CurrencyList> */}
+      <div>
+       {/* <CurrencyList items={currencies}></CurrencyList> */}
 
-     <form>
-         <input ref={taxaInputRef}/>
-         <input ref={nameInputRef}/>
-         <input  type="submit" value="Submit" onClick={add} />
-     </form>
-     </div>
-    );
+       {changes.map((item, index) => (
+                <p>* {item.taxa} = {item.currency.name}</p>
+            ))}
+
+       <form>
+           <input ref={taxaInputRef}/>
+           <input ref={nameInputRef}/>
+           <input  type="submit" value="Submit" onClick={add} />
+       </form>
+       </div>
+      );
+  }
 }
 
 export default Currency;
