@@ -102,13 +102,61 @@ exports.add = async function (req, res) {
   });
   req.body.params.currency_id = user2.wallet.currency.id
   const bet = await aposta.create(req.body.params);
+  //user2.wallet.amout = user2.wallet.amount - req.body.params.
   console.log(bet);
   console.log(req.body.params);
 };
 
 exports.checkAdmin = async function (req, res) {
+  console.log(req.params)
   const user2 = await user.findOne({
     where: { id: req.params.id }});
   console.log(user2);
   return res.status(200).json(user2.isAdmin);
+};
+
+exports.addEvent = async function (req, res) {
+  req.body.params.type = "fulltime"
+  req.body.params.status= "ongoing"
+  const newEvent = await event.create(req.body.params)
+  return res.status(200).json(newEvent);
+};
+
+exports.addResultado = async function (req, res) {
+  const event2 = await event.findOne({where : {id : req.body.params.event_id}})
+  event.update({result : req.body.params.winner, status : "ended"}, {where :{id : event2.id}})
+
+  console.log(event2.id)
+  const bets = await aposta.findAll({where : {event_id : event2.id}})
+  //console.log(bets)
+  for(let k in bets)
+  {
+    if (bets[k].equipa_apostada == req.body.params.winner)
+    {
+      const user2 = await user.findOne({
+        where: { id: bets[k].user_id },
+        include: {
+          model: wallet,
+          as: "wallet",
+          include: { model: currency, as: "currency" },
+        },
+      });
+      console.log(user2)
+      if(event2.result == "team2")
+      {
+        wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+      }
+      else if(event2.result == "team1")
+      {
+        wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+      }
+      else
+      {
+        wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+      }
+    }
+  }
+
+  return res.status(200).json({msg: "sucess"})
+
 };

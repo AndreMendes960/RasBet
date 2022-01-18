@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   const wallet = sequelize.define('wallet', {
     amount: {
       allowNull: false,
-      type: Sequelize.INTEGER
+      type: Sequelize.FLOAT
     }
   });
 

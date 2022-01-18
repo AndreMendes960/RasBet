@@ -7,7 +7,7 @@ const fs = require('fs');
 let config = {  
   database: "RasBet",
   username: "postgres",
-  password: "postgres",
+  password: "fenoninho123",
   host: "127.0.0.1",
   port: 5432,
   dialect: 'postgres',

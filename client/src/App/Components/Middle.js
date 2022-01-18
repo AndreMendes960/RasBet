@@ -1,6 +1,7 @@
 import "./Middle.css"
 import Bet from './Bet';
 function Middle(props) {
+    console.log(props.isAdmin)
     return (
       <div className="middle">
           

@@ -3,10 +3,9 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useEffect, useState, useRef } from "react"
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Select from 'react-select';
-import { addBet } from "../../EventAPI";
+import { addBet, addResultado } from "../../EventAPI";
 function Bet( props) {
-    
-    console.log(props)
+
     const amountInputRef = useRef();
     const oddTeam1ChangeRef = useRef();
     const oddDrawChangeRef = useRef();
@@ -26,8 +25,11 @@ function Bet( props) {
         event.preventDefault()
     }
 
-    const handleSubmitAdmin = (event) => 
+    const handleSubmitAdmin = (id) => 
     {
+
+        console.log(currentAlignmentWinner)
+        addResultado(id, currentAlignmentWinner)
         //const enteredAmount = amountInputRef.current.value
 
         //addBet( enteredAmount, currentAlignment, JSON.parse(sessionStorage.getItem('token')), props.bet.id).then()
@@ -67,9 +69,9 @@ function Bet( props) {
 
             {props.isAdmin && <div className="betMiddle">
                 <ToggleButtonGroup className="betWrapper2" fullWidth value={currentAlignmentWinner} onChange={(event, newAlignmentWinner) => {setCurrentAlignmentWinner(newAlignmentWinner);}} exclusive>
-                    <ToggleButton className="betButton"  size="small" value={"team1W"} aria-label="HOMEW">{props.bet.team1} - {props.bet.odd1}</ToggleButton>
-                    <ToggleButton className="betButton"  size="small" value={"drawW"} aria-label="DRAWW">DRAW - {props.bet.odd2}</ToggleButton>
-                    <ToggleButton className="betButton"  size="small" value={"team2W"} aria-label="AWAYW">{props.bet.team2} - {props.bet.odd3}</ToggleButton>
+                    <ToggleButton className="betButton"  size="small" value={"team1"} aria-label="HOMEW">{props.bet.team1} - {props.bet.odd1}</ToggleButton>
+                    <ToggleButton className="betButton"  size="small" value={"draw"} aria-label="DRAWW">DRAW - {props.bet.odd2}</ToggleButton>
+                    <ToggleButton className="betButton"  size="small" value={"team2"} aria-label="AWAYW">{props.bet.team2} - {props.bet.odd3}</ToggleButton>
                 </ToggleButtonGroup>
             </div>}
                
@@ -79,11 +81,16 @@ function Bet( props) {
                     <input className="betInput" type="number" placeholder="1" ref={oddTeam1ChangeRef}></input>
                     <input className="betInput" type="number" placeholder="D" ref={oddDrawChangeRef}></input>
                     <input className="betInput" type="number" placeholder="2" ref={oddTeam2ChangeRef}></input>
-                    <button className="betButton" onClick={handleSubmitAdmin}>OK</button>
+                    <button className="betButton" onClick={() => handleSubmitAdmin(props.bet.id)}>OK</button>
                     </div>
                 </div>}
         </div> 
+
+
+        
     </div>  
+
+    
         
     );
 

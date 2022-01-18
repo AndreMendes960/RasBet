@@ -19,4 +19,8 @@ router.get('/changes/:id', CurrenciesController.fetchChanges);
 router.post('/changes/add', CurrenciesController.addChanges); 
 router.get('/user/check/:id', EventController.checkAdmin); 
 
+router.post('/events/add', EventController.addEvent); 
+router.post('/events/add/result', EventController.addResultado); 
+
+
 module.exports = router;
