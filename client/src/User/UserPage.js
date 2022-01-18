@@ -20,7 +20,7 @@ function UserPage() {
     }  
     const handleLogout = (event) => 
     {
-      
+      sessionStorage.removeItem("token")
     }
   useEffect(() => {
     fetchUser(JSON.parse(sessionStorage.getItem('token'))).then((response) => {

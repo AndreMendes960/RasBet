@@ -40,3 +40,13 @@ export function fetchUser(userid) {
 export function checkAdmin(id){
     return axios.get(`/user/check/${id}`).then(res => res.data)
 }
+
+export function addEvento(team1, team2, sport, odd1, odd2, odd3){
+    return axios.post('/events/add', {params: { team1, team2, sport, odd1, odd2, odd3}}).then(res => res.data);
+
+}
+
+export function addResultado(event_id, winner){
+    return axios.post('/events/add/result', {params: { event_id, winner}}).then(res => res.data);
+}
+

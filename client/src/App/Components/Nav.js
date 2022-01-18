@@ -15,18 +15,20 @@ function Nav(props) {
     {
     fetchEvents().then(response => {
         setResources(response)
-        checkAdmin(JSON.parse(sessionStorage.getItem('token'))).then(response=>{
-            if(response == "false")
-            {
-                setAdmin(false)
-            }
-            else
-            {
-                setAdmin(true)
-            }
+        // checkAdmin(JSON.parse(sessionStorage.getItem('token'))).then(response=>{
+        //     if(response == "false")
+        //     {
+        //         setAdmin(false)
+        //     }
+        //     else
+        //     {
+        //         setAdmin(true)
+        //     }
 
-            setLoading(false);
-        })
+        //     setLoading(false);
+        // })
+
+        setLoading(false)
         
     });   
     }, [])
