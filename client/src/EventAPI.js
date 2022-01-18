@@ -50,3 +50,15 @@ export function addResultado(event_id, winner){
     return axios.post('/events/add/result', {params: { event_id, winner}}).then(res => res.data);
 }
 
+
+export function Depositar(userid ,amount, currency){
+    return axios.post('/user/deposit', {params: { userid ,amount, currency}}).then(res => res.data);
+}
+
+export function Converter(userid, currency){
+    return axios.post('/user/convert', {params: { userid , currency}}).then(res => res.data);
+}
+
+export function fetchApostas(id){
+    return axios.get(`/apostas/${id}`).then(res => res.data)
+}

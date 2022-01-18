@@ -2,7 +2,7 @@ const { json } = require("express");
 //const { UUID } = require("sequelize/types");
 const models = require("../models");
 const { body } = require("express-validator");
-const { event, user, wallet, currency, aposta } = require("../models");
+const { event, user, wallet, currency, aposta, change } = require("../models");
 var file = require("./test.json");
 
 function sleep(ms) {
@@ -142,9 +142,15 @@ exports.addResultado = async function (req, res) {
         },
       });
       console.log(user2)
+
+      const aux1 =parseFloat(user2.wallet.amount)
+      const aux2 =parseFloat(bets[k].amount)
+      const aux3 =parseFloat(event2.odd3)
+      const profit = aux1 + (aux2*aux3)
+
       if(event2.result == "team2")
       {
-        wallet.update({amount: user2.wallet.amount + (bets[k].amount* event2.odd3)}, {where: {id : user2.wallet_id}})
+        wallet.update({amount: profit}, {where: {id : user2.wallet_id}})
       }
       else if(event2.result == "team1")
       {
@@ -159,4 +165,81 @@ exports.addResultado = async function (req, res) {
 
   return res.status(200).json({msg: "sucess"})
 
+};
+
+exports.deposit = async function (req, res) {
+
+  const user2 = await user.findOne({where:{id : req.body.params.userid}, include: {model: wallet, as: "wallet"}})
+  const curr = await currency.findOne({where: {name : req.body.params.currency}})
+
+  if(user2.wallet.currency_id == curr.id)
+  {
+    console.log("match")
+    const aux1 =parseFloat(user2.wallet.amount)
+    const aux2 =parseFloat(req.body.params.amount)
+    const profit = aux1 + aux2
+    wallet.update({amount: profit}, {where: {id : user2.wallet_id}})
+  }
+  else
+  {
+    const change2 = await change.findOne({where:{ currency1_id: curr.id, currency2_id : user2.wallet.currency_id}})
+    if(change2)
+    {
+      const aux1 =parseFloat(user2.wallet.amount)
+      const aux2 =parseFloat(req.body.params.amount)
+      const aux3 =parseFloat(change2.taxa)
+      const profit = aux1 + (aux2 * aux3)
+      console.log(profit)
+      wallet.update({amount: profit}, {where: {id : user2.wallet_id}})
+    }
+  }
+  return res.status(200).json();
+};
+
+
+exports.convert = async function (req, res) {
+
+  const user2 = await user.findOne({where:{id : req.body.params.userid}, include: {model: wallet, as: "wallet"}})
+  const curr = await currency.findOne({where: {name : req.body.params.currency}})
+
+  const change2 = await change.findOne({where:{ currency1_id: curr.id, currency2_id : user2.wallet.currency_id}})
+  if(change2)
+  {
+    const aux1 =parseFloat(user2.wallet.amount)
+    const aux3 =parseFloat(change2.taxa)
+    const profit = aux1 * aux3
+    console.log(profit)
+    wallet.update({amount: profit, currency_id : curr.id}, {where: {id : user2.wallet_id}})
+  }
+  
+  return res.status(200).json();
+};
+
+
+exports.fetch = async function (req, res) {
+  const user2 = await user.findOne({
+    where: { id: req.params.userid },
+    include: {
+      model: wallet,
+      as: "wallet",
+      include: { model: currency, as: "currency" },
+    },
+  });
+  if (user2) {
+    console.log("user exists");
+    return res.status(200).json(user2);
+  } else {
+    console.log("user does not exist");
+  }
+};
+
+
+exports.listApostas = async function (req, res) {
+  const user2 = await user.findOne({
+    where: { id: req.params.id }});
+
+
+  const bets = await aposta.findAll({where : {user_id : user2.id}, include : {model: event, as: "event"}})
+  //console.log(bets)
+  return res.status(200).json(bets);
 };
