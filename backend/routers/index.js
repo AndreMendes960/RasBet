@@ -25,5 +25,6 @@ router.post('/events/add/result', EventController.addResultado);
 
 router.post('/user/deposit', EventController.deposit); 
 router.post('/user/convert', EventController.convert); 
+router.post("/getAPI", EventController.addAPI)
 
 module.exports = router;

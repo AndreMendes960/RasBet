@@ -62,3 +62,7 @@ export function Converter(userid, currency){
 export function fetchApostas(id){
     return axios.get(`/apostas/${id}`).then(res => res.data)
 }
+
+export function fetchAPI(){
+    return axios.post(`/getAPI`).then(res => res.data)
+}
