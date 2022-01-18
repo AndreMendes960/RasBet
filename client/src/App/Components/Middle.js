@@ -1,14 +1,15 @@
 import "./Middle.css"
 import Bet from './Bet';
+import { useState } from "react";
 function Middle(props) {
-    console.log(props.isAdmin)
+    
     return (
       <div className="middle">
           
         <ul>
-            {props.items.map((item, index) => (
+            {props.items.map((item, index) => 
                 <Bet isAdmin={props.isAdmin} key={index} bet={item}></Bet>
-            ))}
+            )}
         </ul>
     </div>  
         
