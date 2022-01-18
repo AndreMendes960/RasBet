@@ -26,7 +26,7 @@ function Withdraw() {
                 <div className="depositWrapper">
                     <p className="depositLogo">WITHDRAW</p>
                     <div className="depositTop">
-                        <input className="depositInput" type="text" ref={moeda} placeholder="Moeda"></input>
+                        <input className="depositInput" type="text" ref={moeda} placeholder="Amount"></input>
                     </div>
                     <div className="depositBot">
                         <button className="depositButton" onClick={handleSubmit}>Withdraw</button>
