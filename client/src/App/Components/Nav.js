@@ -7,20 +7,20 @@ function Nav(props) {
 
     const isLoggedIn = JSON.parse(sessionStorage.getItem('token'));
     const history = useNavigate()
-
+    console.log(isLoggedIn)
     const [resources, setResources] = useState([]);
     const [user, setUser] = useState();
     const [isLoading, setLoading] = useState(true)
     const[isAdmin, setAdmin] = useState(false)
     
     useEffect(() => {
-      if(isLoggedIn != null){
+     
       fetchUser(JSON.parse(sessionStorage.getItem('token'))).then((response) => {
         setUser(response);
         console.log(response)
         setLoading(false)
       });
-    }}, []);
+  }, []);
   
     const handleRedirect = (event) => 
     {
@@ -39,7 +39,7 @@ function Nav(props) {
     {
       history("/mybets")
     }
-
+console.log(isLoggedIn)
     if (isLoading) {
       return <div className="homeContainer">Loading...</div>;
     }
@@ -50,7 +50,7 @@ function Nav(props) {
         <div className="logo" onClick={handleRedirect}>RasBet</div>
         
         <ul className="nav-links">
-        {isLoggedIn ? (
+        {(isLoggedIn != null) ? (
         
         <div className="menu">
             <li ><a onClick={handleRedirectMybets}>My Bets</a></li>
@@ -59,7 +59,7 @@ function Nav(props) {
                 <a onClick={handleRedirect2}>Currencies</a>
              
             </li>}
-            <li><a >{user.wallet.amount} {user.wallet.currency.name}</a></li>
+            <li><a >{user.wallet.amount} {user.wallet.currency.name }</a></li>
             <li><a onClick={handleRedirect1}>{user.name}</a></li>
     
             </div>) :  
