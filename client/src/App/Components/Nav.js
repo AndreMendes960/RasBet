@@ -12,7 +12,7 @@ function Nav(props) {
     const[isAdmin, setAdmin] = useState(false)
     
     useEffect(() => {
-      if(isLoggedIn != null){
+     
       fetchUser(JSON.parse(sessionStorage.getItem('token'))).then((response) => {
         setUser(response);
         console.log(response)
@@ -39,7 +39,7 @@ function Nav(props) {
     {
       history("/mybets")
     }
-
+console.log(isLoggedIn)
     if (isLoading) {
       return <div className="homeContainer">Loading...</div>;
     }
@@ -50,7 +50,7 @@ function Nav(props) {
         <div className="logo" onClick={handleRedirect}>RasBet</div>
         
         <ul className="nav-links">
-        {isLoggedIn ? (
+        {(isLoggedIn != null) ? (
         
         <div className="menu">
             <li ><a onClick={handleRedirectMybets}>My Bets</a></li>
@@ -61,6 +61,7 @@ function Nav(props) {
             </li>}
             {(user != null) ? <li><a >{user.wallet.amount} {user.wallet.currency.name}</a></li> : <></>}
             {(user!= null) ? <li><a onClick={handleRedirect1}>{user.name}</a></li> : <></>}
+
     
             </div>) :  
         <div className="menu">

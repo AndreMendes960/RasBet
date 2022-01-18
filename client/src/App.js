@@ -6,6 +6,7 @@ import Registar from "./User/Registar"
 import Login from "./User/Login";
 import Deposit from "./User/Deposit";
 import Convert from "./User/Convert";
+import Withdraw from "./User/Withdraw";
 import Main from "./App/Main";
 import Mybet from "./App/Mybet";
 import UserPage from "./User/UserPage"
@@ -32,6 +33,7 @@ return(
         <Route path="/user" element={<UserPage/>}></Route>
         <Route path="/deposit" element={<Deposit/>}></Route>
         <Route path="/convert" element={<Convert/>}></Route>
+        <Route path="/withdraw" element={<Withdraw/>}></Route>
         <Route path="/registar" element={<Registar/>}></Route>
         <Route path="/login" element={<Login setToken={setToken}/>}></Route>
         <Route path="/managecurrencies" element={<CurrencyPage/>}> </Route>

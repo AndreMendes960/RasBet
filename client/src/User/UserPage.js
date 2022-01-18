@@ -7,7 +7,7 @@ import "./userPage.css";
 import Nav from ".././App/Components/Nav";
 function UserPage() {
   const [user, setUser] = useState();
-  const[loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const history = useNavigate()
 
   const handleRedirectDeposit = (event) => 
@@ -21,6 +21,10 @@ function UserPage() {
     const handleLogout = (event) => 
     {
       sessionStorage.removeItem("token")
+    }
+    const handleRedirectWithdraw = (event) => 
+    {
+      history("/withdraw")
     }
   useEffect(() => {
     fetchUser(JSON.parse(sessionStorage.getItem('token'))).then((response) => {
@@ -52,7 +56,7 @@ function UserPage() {
                 </div>
               </div>
               <div className="userBot">
-                <button className="userButton">Withdraw</button>
+                <button className="userButton" onClick={handleRedirectWithdraw}>Withdraw</button>
                 <button className="userButton">Betting History</button>
                 <button className="userButton">Definitions</button>
                 <button className="userButton" onClick={handleLogout}>Logout</button>
